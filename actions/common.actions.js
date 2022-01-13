@@ -3,7 +3,6 @@ const MainPage = require("../pages/main.page")
 
 module.exports = {
     /**
-     * 
      * @param {MainPage} mainPage 
      */
     async loginAction(mainPage){
@@ -14,11 +13,33 @@ module.exports = {
     },
 
     /**
-     * 
      * @param {PW.Page} page 
+     * @param {("ui" | "request")} ui_request 
      */
-    async logoutAction(page){
-        await page.locator("[class='logout'] >> text=Sign out").click();
-        await expect(page.locator("a >> text=Sign in")).toBeVisible();  
+    async logoutAction(page, ui_request = "ui"){
+        /**
+         * The reason why I added testUrl to page object is that our actions
+         * shouldn't know anything about context where they are executes
+         */
+        let testUrl = page.testUrl;
+        
+        let logoutUI = async () => {
+            return await page.locator("[class='logout'] >> text=Sign out").click();
+        }
+        let logoutRequest = async () =>{
+            await page.request.get(`${testUrl.href}?mylogout=`);
+            /**
+             * In case, if we want to do something extra :)
+             */
+            await page.evaluate((testUrl)=>{
+                window.fetch(`${testUrl.href}?controller=identity`);
+            }, testUrl);     
+
+            return await page.request.get(`${testUrl.href}?controller=authentication&back=identity`).then(response=>{
+                page.goto(response.url())
+            });
+        }
+
+        ui_request == "ui" ? await logoutUI() : await logoutRequest();
     }
 }
