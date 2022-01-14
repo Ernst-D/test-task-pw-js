@@ -34,7 +34,7 @@ const test = base.test.extend({
 }});
 
 test.describe.parallel("Logout test suite",() => {
-    test.skip('Logout UI with predefined user', async ({ mainPage }) => {
+    test('Logout UI with predefined user', async ({ mainPage }) => {
         let page = mainPage.page;
         await test.step("Logout action via UI", async () => {
            await logoutAction(page);
