@@ -1,4 +1,5 @@
-const PW = require("@playwright/test")
+const PW = require("@playwright/test");
+const logoutFixture = require("../fixtures/logout.fixture");
 const MainPage = require("../pages/main.page")
 
 module.exports = {
@@ -6,9 +7,10 @@ module.exports = {
      * @param {MainPage} mainPage 
      */
     async loginAction(mainPage){
+        let { email, password } = logoutFixture.predefinedUser();
         await mainPage.signinBtn.click();
-        await mainPage.page.fill('input[name="email"]', 'hkosotnvatcoetuzln@kvhrs.com');
-        await mainPage.page.fill('input[name="passwd"]', 'password123');    
+        await mainPage.page.fill('input[name="email"]', email);
+        await mainPage.page.fill('input[name="passwd"]', password);    
         await mainPage.page.click('button:has-text("Sign in")');
     },
 
@@ -30,6 +32,7 @@ module.exports = {
             await page.request.get(`${testUrl.href}?mylogout=`);
             /**
              * In case, if we want to do something extra :)
+             * P.S. Better not do such thing in production
              */
             await page.evaluate((testUrl)=>{
                 window.fetch(`${testUrl.href}?controller=identity`);
