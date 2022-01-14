@@ -1,0 +1,24 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1
+jobs:
+  build:
+    docker:
+    - image: mcr.microsoft.com/playwright:focal
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: npx playwright --version
+      - run: npm run test -- --project="chromium"
+
+      - store_artifacts:
+          path: ./playwright-report
+      - store_artifacts:
+          path: ./test-results
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
