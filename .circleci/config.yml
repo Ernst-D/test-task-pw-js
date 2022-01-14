@@ -7,6 +7,9 @@ jobs:
     - image: mcr.microsoft.com/playwright:focal
     steps:
       - checkout
+      - node/install:
+            node-version: "16.13.1"
+      - run: node -v
       - node/with-cache:
           steps:
             - run: npm install
