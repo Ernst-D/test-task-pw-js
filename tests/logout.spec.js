@@ -29,18 +29,20 @@ const test = base.test.extend({
         await use(mainPage);
 }});
 
-test('Logout UI with predefined user', async ({ mainPage }) => {
-    let page = mainPage.page;
-    await test.step("Logout action via UI", async () => {
-       await logoutAction(page);
-       await expect(page.locator("a >> text=Sign in")).toBeVisible();  
+test.describe.parallel("Logout test suite",() => {
+    test('Logout UI with predefined user', async ({ mainPage }) => {
+        let page = mainPage.page;
+        await test.step("Logout action via UI", async () => {
+           await logoutAction(page);
+           await expect(page.locator("a >> text=Sign in")).toBeVisible();  
+        });
     });
-});
-
-test("Logout via API with predifined user", async ({mainPage, testUrl}) => {
-    await test.step("Logout action via request", async () => {
-        mainPage.page.testUrl = testUrl;
-        await logoutAction(mainPage.page,"request");
-        await expect(mainPage.page.locator("a >> text=Sign in")).toBeVisible();  
-     });
+    
+    test("Logout via API with predifined user", async ({mainPage, testUrl}) => {
+        await test.step("Logout action via request", async () => {
+            mainPage.page.testUrl = testUrl;
+            await logoutAction(mainPage.page,"request");
+            await expect(mainPage.page.locator("a >> text=Sign in")).toBeVisible();  
+         });
+    });
 });
