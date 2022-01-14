@@ -1,4 +1,5 @@
-const Playwright = require("@playwright/test")
+// eslint-disable-next-line no-unused-vars
+const Playwright = require("@playwright/test");
 
 class MainPage {
     /**

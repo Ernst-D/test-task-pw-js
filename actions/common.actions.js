@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 const PW = require("@playwright/test");
+const MainPage = require("../pages/main.page");
 const logoutFixture = require("../fixtures/logout.fixture");
-const MainPage = require("../pages/main.page")
 
 module.exports = {
     /**
@@ -27,22 +29,22 @@ module.exports = {
         
         let logoutUI = async () => {
             return await page.locator("[class='logout'] >> text=Sign out").click();
-        }
-        let logoutRequest = async () =>{
+        };
+        let logoutRequest = async () => {
             await page.request.get(`${testUrl.href}?mylogout=`);
             /**
              * In case, if we want to do something extra :)
              * P.S. Better not do such thing in production
              */
-            await page.evaluate((testUrl)=>{
+            await page.evaluate((testUrl) => {
                 window.fetch(`${testUrl.href}?controller=identity`);
             }, testUrl);     
 
-            return await page.request.get(`${testUrl.href}?controller=authentication&back=identity`).then(response=>{
-                page.goto(response.url())
+            return await page.request.get(`${testUrl.href}?controller=authentication&back=identity`).then(response => {
+                page.goto(response.url());
             });
-        }
+        };
 
         ui_request == "ui" ? await logoutUI() : await logoutRequest();
     }
-}
+};

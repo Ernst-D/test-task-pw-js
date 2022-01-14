@@ -10,19 +10,19 @@ const MainPage = require('../pages/main.page');
  * so we extend test object with some predefined conditions
  */
 const test = base.test.extend({    
-    testUrl: ({},use) =>{
+    testUrl: ({},use) => {
         use(testUrl);
     },
     mainPage: async ({ page }, use) => {
         const mainPage = new MainPage(page);
 
-        await test.step("Navigate to the main page",async()=>{
+        await test.step("Navigate to the main page",async() => {
             await mainPage.page.goto(testUrl.href);
         });
-        await test.step("Login action",async()=>{
+        await test.step("Login action",async() => {
             await loginAction(mainPage);
         });
-        await test.step("Assert personal info", async()=>{   
+        await test.step("Assert personal info", async() => {   
             await page.click('text=My personal information');
             await expect(page.locator('#email')).toHaveValue(predefinedUser().email);
         });
@@ -31,16 +31,16 @@ const test = base.test.extend({
 
 test('Logout UI with predefined user', async ({ mainPage }) => {
     let page = mainPage.page;
-    await test.step("Logout action via UI", async ()=>{
+    await test.step("Logout action via UI", async () => {
        await logoutAction(page);
        await expect(page.locator("a >> text=Sign in")).toBeVisible();  
-    })
+    });
 });
 
-test("Logout via API with predifined user", async ({mainPage, testUrl})=>{
-    await test.step("Logout action via request", async ()=>{
+test("Logout via API with predifined user", async ({mainPage, testUrl}) => {
+    await test.step("Logout action via request", async () => {
         mainPage.page.testUrl = testUrl;
         await logoutAction(mainPage.page,"request");
         await expect(mainPage.page.locator("a >> text=Sign in")).toBeVisible();  
-     })
-})
+     });
+});

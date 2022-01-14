@@ -1,6 +1,5 @@
 // @ts-check
 const { devices } = require('@playwright/test');
-const path = require('path');
 
 /**
  * @see https://playwright.dev/docs/test-configuration

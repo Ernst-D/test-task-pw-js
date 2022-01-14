@@ -1,4 +1,4 @@
-// @ts-check
+// eslint-disable-next-line no-unused-vars
 const PW = require("@playwright/test");
 const { test, expect} = require('@playwright/test');
 const chance = require("chance").Chance;
@@ -16,7 +16,7 @@ test.afterAll(async ({ }) => {
     await apiContext.dispose();
 });
 
-test.describe("API test suite",()=>{
+test.describe("API test suite",() => {
     test('Create user', async () => {
         let name = chance().name();
         let job = chance().word();
@@ -43,8 +43,8 @@ test.describe("API test suite",()=>{
         expect(response.status()).toBe(200);
         expect(await response.json()).toHaveProperty("updatedAt");
     });
-    test("Delete user",async ()=>{
+    test("Delete user",async () => {
         let response = await apiContext.delete('/api/users/2');
         expect(response.status()).toBe(204);
-    })
-})
+    });
+});

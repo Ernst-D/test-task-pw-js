@@ -4,6 +4,6 @@ module.exports = {
         return {
             email:"hkosotnvatcoetuzln@kvhrs.com",
             password:"password123"
-        }
+        };
     }
-}
+};
