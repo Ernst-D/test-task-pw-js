@@ -17,10 +17,8 @@ jobs:
       - run: npm run test -- --project="chromium" --workers=4
 
       - store_artifacts:
-          destination: playwright-report
-          path: ./playwright-report
+          path: ./playwright-report/index.html
       - store_artifacts:
-          destination: traces
           path: ./test-results
 workflows:
   version: 2
