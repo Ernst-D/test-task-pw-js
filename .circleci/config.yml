@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - node/install:
-            node-version: "16.13.1"
+            node-version: "16.13.2"
       - run: node -v
       - node/with-cache:
           steps:
