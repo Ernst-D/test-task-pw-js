@@ -40,6 +40,8 @@ If you want run the tests on your machine - you should have nvm ([Windows](https
 
     Example (Windows): `npx playwright show-trace .\test-results\logout-Logout-test-suite-Logout-via-API-with-predifined-user-chrome\trace.zip`
 
+5. If you want to run Playwright with [Moon](https://aerokube.com/moon/latest/#_getting_started) - please, use [minikube](https://aerokube.com/moon/latest/#install-minikube) and refer to [this](https://aerokube.com/moon/latest/#_using_playwright) section
+
 <h2 id = "ci"> CI </h2>
 
 Use link below to navigate to CircleCI
