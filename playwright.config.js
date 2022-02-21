@@ -56,16 +56,6 @@ const config = {
       },
     },
     {
-      name: 'chrome',
-
-      /* Project-specific settings. */
-      use: {
-        channel:"chrome",
-        ...devices['Desktop Chrome'],
-      },
-    },
-
-    {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
